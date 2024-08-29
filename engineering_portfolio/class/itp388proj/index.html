@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <link rel="icon" type="image/png" href="/favicon.ico?" />
+        <link rel="apple-touch-icon" type="image/x-icon" href="/favicon.ico?" />
+        <title>S-LOCKS Main Page</title>
+        <link rel="stylesheet" href="/commonStyles.css">
+    </head>
+    <body a link="blue" vlink="blue">
+        <h1>Smart Lock Option for Caring for Kids and Seniors (S-LOCKS)</h1>
+        <h2>Goal</h2>
+        <p>Create a smart door lock for children and seniors who tend to wander off.</p>
+        <h2>Cause</h2>
+        <p>A class in Spring 2024 required us to form groups and come up with a project that contains a system of at least two connected devices.</p>
+        <h2>Process</h2>
+        <p>First, we had to figure out which how the smart lock would actually work, and what it would be connected to. We eventually arrived at the following characteristics:</p>
+        <ul>
+            <li>The lock will not allow whoever is inside to open the door without scanning a valid RFID card.</li>
+            <li>The lock will allow whoever is outside to open the door without scanning a valid RFID card.</li>
+            <li>The lock will use tilt sensors to determine if the door is being opened.</li>
+            <li>The lock will use a low-power linear actuator to prevent the door from being opened.</li>
+            <li>The lock's default position will be the unlocked position, making sure the door is still openable if the power is cut.</li>
+            <li>The lock will use a magnetic switch to determine if the door is opened or closed.</li>
+            <li>The lock will connect to an app on the user's phone that monitors the lock's state and allows overrides.</li>
+            <li>The lock will have a speaker that emits a different tone depending on if the RFID card is valid or not.</li>
+            <li>The lock's microcontroller will be an Adafruit Huzzah ESP32 Feather.</li>
+        </ul>
+        <table>
+            <tr>
+                <th>Implementation Schematic</th>
+                <th>Breadboard Schematic</th>
+            </tr>
+            <tr>
+                <td><img src="./DoorSchematic.jpg" height="600"></td>
+                <td><img src="./Breadboard_Layout.jpg" height="600"></td>
+            </tr>
+        </table>
+        <table>
+            <tr>
+                <th>Data Flow</th>
+            </tr>
+            <tr>
+                <td><img src="./DataFlow.jpg" height="500"></td>
+            </tr>
+        </table>
+        <p>After we finalized the structure of the smart lock, we divided the work such that Kenneth and I were in charge of the software, Sam was in charge of the circuit schematics and PCBs, and I was in charge of 3D-printing any pieces for holding the PCBs. However, we would help each other out when needed. In the final stretch, we saw that the soldering would be a one-person job. Because I had some prior experience with soldering before the class, I took on that task.</p>
+        <h2>Results</h2>
+        <p>The project worked as intended, and we were able to give a live demo during the class. The code has been uploaded to a <a href="https://www.github.com/Barabrad/itp388_Sp24Proj" target="_blank">GitHub repository</a> for the class deliverable, but I tidied up the repository and added the hardware-related files a couple months later.</p>
+        <p>We used <a href="https://blynk.io" target="_blank">Blynk</a> for the app connectivity aspect, and created the following interface on the app:</p>
+        <img src="./AppInterface.jpg" height="300">
+        <p>We decided to have the tilt sensors on separate PCBs so they could be perpendicular to the main board, allowing us to have our prototype resemble our schematic. Our final iteration of the PCBs are shown below, along with the final prototype.</p>
+        <table>
+            <tr>
+                <th>Main Board (All)</th>
+            </tr>
+            <tr>
+                <td><img src="./MainBoardPCB_All.jpg" height="500"></td>
+            </tr>
+            <tr>
+                <th>Main Board (Bottom)</th>
+            </tr>
+            <tr>
+                <td><img src="./MainBoardPCB_Bottom.jpg" height="500"></td>
+            </tr>
+            <tr>
+                <th>Main Board (Top)</th>
+            </tr>
+            <tr>
+                <td><img src="./MainBoardPCB_Top.jpg" height="500"></td>
+            </tr>
+        </table>
+        <br>
+        <table>
+            <tr>
+                <th>Tilt Board (All)</th>
+            </tr>
+            <tr>
+                <td><img src="./TiltBoardPCB_All.jpg" height="500"></td>
+            </tr>
+        </table>
+        <br>
+        <table>
+            <tr>
+                <th>Final Prototype (Bottom)</th>
+            </tr>
+            <tr>
+                <td><img src="./FinalBoard_Bottom.jpg" width="700"></td>
+            </tr>
+            <tr>
+                <th>Final Prototype (Top)</th>
+            </tr>
+            <tr>
+                <td><img src="./FinalBoard_Top.jpg" width="700"></td>
+            </tr>
+        </table>
+        <br><br><br>
+        <button onclick="goBack()">Go Back</button>
+        <script>
+            function goBack() {history.back();}
+        </script>
+    </body>
+</html>

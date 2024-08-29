@@ -1,0 +1,28 @@
+button {
+    text-align: center;
+    width: 100px;
+    height: 40px;
+    background-color: #ffffff;
+    color: #000000;
+    border-radius: 15px;
+    border-color: #000000;
+    font-weight: bold;
+    font-size: 15px;
+}
+.data {
+    font-family: 'Courier New', Courier, monospace;
+}
+table, th, td {
+    border: 1px solid black;
+    border-collapse: collapse;
+    padding: 10px;
+}
+th {
+    background-color: #dadada;
+}
+tr:nth-child(even) {
+    background-color: #efefef;
+}
+tr:hover {
+    background-color: #D6EEEE;
+}

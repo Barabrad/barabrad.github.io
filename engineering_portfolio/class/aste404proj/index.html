@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <link rel="icon" type="image/png" href="/favicon.ico?" />
+        <link rel="apple-touch-icon" type="image/x-icon" href="/favicon.ico?" />
+        <title>2D Mapper Main Page</title>
+        <link rel="stylesheet" href="/commonStyles.css">
+    </head>
+    <body a link="blue" vlink="blue">
+        <h1>2D Mapper</h1>
+        <h2>Goal</h2>
+        <p>Construct a prototype for a vehicle that can map out lunar caves.</p>
+        <h2>Cause</h2>
+        <p>A class in Fall 2022 required us to form groups and come up with a project that utilizes numerical methods.</p>
+        <h2>Process</h2>
+        <p>First, we had to find the sensors needed for this project. One of my groupmates had a Raspberry Pi, so we bought an IMU (Inertial Measurement Unit) and a rotating LiDAR. The former was used to determine the rover's state while the latter was used to find the distance from the rover to the walls. We split the work such that the four of us would take on one different part of the task: IMU integration, LiDAR integration, sensor fusion, and data analysis. I was in charge of sensor fusion, but while I was waiting for the IMU and LiDAR code, I wrote a set of Python functions that allowed for the rotating of vectors using quaternions. Those functions allowed us to keep the gravity vector pointing down even when the IMU was at an angle via the following steps:</p>
+        <ol>
+            <li>Obtain the roll-pitch-yaw (RPY) set from the IMU by integrating the angular velocities.</li>
+            <li>Call one of the functions to convert the RPY set into a quaternion.</li>
+            <li>Call another function to rotate the downward gravity vector using that quaternion (this function calls another function that does the quaternion multiplication).</li>
+        </ol>
+        <p>As part of our project, we had to make an HTML page. For more details on the procedure, click the <a href="./submissionPage.html">link</a> to see the submission page.</p>
+        <h2>Results</h2>
+        <p>We had originally planned to use <a href="https://docs.ros.org/en/jazzy/" target="_blank">ROS2</a>, but we found out that we could not use custom messages with our purely Python architecture. Because we did not have much time left, I had to resort to a naïve implementation for the sensor fusion. We were able to get data, but the IMU drift kept messing up the fused sensor data.</p>
+        <p>For more details on the results, click the <a href="./submissionPage.html">link</a> to see the submission page.</p>
+        <br><br><br>
+        <button onclick="goBack()">Go Back</button>
+        <script>
+            function goBack() {history.back();}
+        </script>
+    </body>
+</html>

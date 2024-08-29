@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+    <meta charset="utf-8">
+    <link rel="icon" type="image/png" href="/favicon.ico?" />
+    <link rel="apple-touch-icon" type="image/x-icon" href="/favicon.ico?" />
+    <title>LUNA Project Page</title>
+    <link rel="stylesheet" href="/commonStyles.css">
+    <head>
+        <style>
+            body {
+                font-family: 'Times New Roman', Times, serif;
+            }
+            h1, h2, h3 {
+                text-align: center;
+            }
+            h4, p, ul {
+                padding-top: 0pt;
+                margin-top: 0pt;
+                padding-bottom: 0pt;
+                margin-bottom: 0pt;
+                line-height: 1.5;
+            }
+        </style>
+    </head>
+    <body a link="blue" vlink="blue">
+
+        <h1>Lunar Underground Navigator and Analyzer (LUNA)</h1>
+
+        <h2>Brad Barakat, Tristan Griffith, Griffin MacRae, Ashley Modena</h2>
+        <h3>ASTE-404, Fall 2022</h3>
+
+        <br>
+
+        <h4>Project Description</h4>
+        <p>
+            &emsp;Our project is to develop a LiDAR sensor system that can accurately map the interior of lunar caves. This sensor would be strapped to a lunar rovers capable of descending into lunar caves. The goal of this project is to get a better understanding of lunar terrain and use these maps for further exploration and study of the Moon. The sensor system consists of a LiDAR sensor with one degree of freedom (in-plane rotation), an Inertial Measurement Unit (IMU) sensor, and a Raspberry Pi. Each member of the team had a different role, Brad worked on sensor fusion, Tristan worked on LiDAR integration, Griffin worked on IMU integration, and Ashley worked on data visualization and mapping.
+        </p>
+        <br><br> 
+
+        <h4>Objectives</h4>
+        <ul>
+            <li>Use LiDAR sensor to detect cave formations</li>
+            <li>Use IMU to record depth of cave</li>
+            <li>Use Python within a ROS2 architecture to translate data from sensors into XYZ coordinates</li>
+            <li>Use Paraview to visualize data and analyze depth and complexity of caves</li>
+        </ul>
+        <br><br>
+
+        <h4>Methods</h4>
+        <p>
+            &emsp;The numerical method used was a simple time step integration scheme, where <i>v</i><sub>1</sub> = <i>v</i><sub>0</sub> + <i>a</i>Δ<i>t</i>, and <i>p</i><sub>1</sub> = <i>p</i><sub>0</sub> + <i>v</i><sub>1</sub>Δ<i>t</i> (where <i>a</i> is the acceleration, <i>v</i> is the velocity, <i>p</i> is the position, and Δ<i>t</i> is the time step). As for the determining the direction of gravity relative to the IMU, the roll, pitch, and yaw angles calculated in the IMU File were used to find a quaterion characterizing the rotation from the initial state to the current state. Such a quaternion could rotate the gravity vector from being solely in the -<i>z</i> direction to what the IMU senses is the gravity vector. In the <b>Data Flow</b> figure, the transformed vector is calculated in the IMU File using functions from the Vector Rotation File.
+        </p>
+        <br><br>
+
+        <h4>Challenges</h4>
+        <p>
+            &emsp;Custom message files are not available with pure Python ROS2 packages, so a naïve implementation was used (see <b>Data Flow</b>). With this implementation came another significant issue: the smaller the time step for the IMU sensor, the less data the LiDAR would return before stopping transmission. Given the IMU's tendency to drift, larger time steps would lead to worse results. (The IMU drift is also why the goal of a 3D map was simplified to a 2D cross-section.) The implemented solution was to determine the amount of data points the LiDAR returns for the used time step, and then have the code essentially restart the LiDAR's scanner before the number of data points reaches the aforementioned limit. Although this solution keeps the code modular, in that the file for each sensor contains functions solely for its sensor, it causes a gap in the data stream ranging from 1-2 seconds. Had time allowed, the bug would have been properly troubleshooted, or the files would have been translated to C++ and incorporated into a C++ ROS2 package.
+        </p>
+        <br><br>
+
+        <h4>Data Flow</h4>
+        <img src="./DataFlow.jpg" alt="DataFlow" width="800">
+        <p>
+            &emsp;Aside from the sensors, each box is a file. The four Python files are the LiDAR File, IMU File, Vector Rotation File, and Sensor Fusion File. (The LiDAR File was found <a href="https://github.com/Roboticia/RPLidar" target="_blank">here</a>.) The rest of the files are CSV files that hold data. The Vector Rotation File provides functions to the IMU File that allow it to determine the XYZ accelerations due to gravity, and thus account for them. Because the Sensor Fusion File runs on loop, the IMU File outputs the most recent positions, velocities, and angles to a file so it can refer back to them when finding the new positions, velocities, and angles. The Acceleration file is meant for troubleshooting, but the Fused Data File is what will be visualized in Paraview.
+        </p>
+        <p>
+            &emsp;The way the code was run was by using SSH to access the Raspberry Pi, and manually running the Sensor Fusion File. To download the data, SCP was used to copy the output files from the Raspberry Pi. However, we found out that a downside of this method is that the Raspberry Pi must be connected to WiFi, and connecting it to a different network would require a monitor and keyboard.
+        </p>
+        <br><br>
+
+        <h4>Results</h4>
+        <p>
+            &emsp;Four runs were done to determine if the sensors were fused: for each IMU state (enabled/disabled), the rover would be stationary or moving. The layout of the room is shown in the below image.
+        </p>
+        <img src="./Blueprint.png" alt="Blueprint" width="400">
+        <p>
+            &emsp;The results of the runs are in the below table, where the first column contains the stationary tests, and the second contains the moving tests. The first row shows the tests where the IMU was disabled, and the second shows the tests where the IMU was enabled. The black points are the features of the room relative to the rover's self-calculated location, and the red points are the rover's self-calculated locations. The stationary test with the IMU disabled shows that the LiDAR is able to map out the features of the room, and the moving test with the IMU confirms that the features of the room would shift if the rover's location is not updated. However, the tests with the IMU enabled show that the IMU's drifting is significant enough that the results no longer resemble a cross-section of a room.
+        </p>
+        <br>
+        <table>
+            <tr>
+                <th>Stationary</th>
+                <th>Moving</th>
+            </tr>
+            <tr>
+                <td><img src="./Still.jpg" alt="Still" width="500"></td>
+                <td><video src="./Moving.mp4" alt="Moving" width="500" controls muted></td>
+            </tr>
+            <tr>
+                <td><img src="./Still_noIMU.jpg" alt="Still_noIMU" width="500"></td>
+                <td><img src="./Line_noIMU_20s.jpg" alt="Line_noIMU_20s" width="500"></td>
+            </tr>
+            <tr>
+                <td><img src="./Still_IMU_30s.jpg" alt="Still_IMU_30s" width="500"></td>
+                <td><img src="./Line_IMU_17s.jpg" alt="Line_IMU_17s" width="500"></td>
+            </tr>
+        </table>
+        <br><br>
+
+        <h4>Summary of Outcomes</h4>
+        <p>
+            &emsp;Initially, we tried to integrate the IMU and LiDAR data together to yield a 3D plot similar to a topographic graph. This would have been accomplished by having the rover drive over ramps or bumps. In order to do this, we had one file constantly running which would call data from the IMU and from the LiDAR and mesh them together (see <b>Data Flow</b>). However, we were limited to the 2D data of the LiDAR sensor because the IMU's drift. Additionally, due to the implementation described in the <b>Challenges</b> section, the data rate from the LiDAR was limited.
+        </p>
+        <br><br>
+
+        <h4>Future Work</h4>
+        <ul>
+            <li>Switching from a Python-based naïve sensor fusion implementation to a C++-based ROS2 architecture</li>
+            <li>Implementing a GPS-like tracker instead of an IMU to determine location relative to a source without noise or drift</li>
+            <li>Building a robot that can hold the components, instead of using a remote-controlled car</li>
+            <li>Putting the LiDAR on a platform that can be tilted to capture data at different altitudes</li>
+            <li>Find some way to start the code and download the output data without WiFi</li>
+        </ul>
+        
+        <br><br><br>
+        <button onclick="goBack()">Go Back</button>
+        <script>
+            function goBack() {history.back();}
+        </script>
+
+    </body>
+</html>

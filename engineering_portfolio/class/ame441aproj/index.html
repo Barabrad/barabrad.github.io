@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <link rel="icon" type="image/png" href="/favicon.ico?" />
+        <link rel="apple-touch-icon" type="image/x-icon" href="/favicon.ico?" />
+        <title>Robust Quadruped Robot Motor Main Page</title>
+        <link rel="stylesheet" href="/commonStyles.css">
+    </head>
+    <body a link="blue" vlink="blue">
+        <h1>Robust Quadruped Robot Motor</h1>
+        <h2>Goal</h2>
+        <p>Create a motor gearbox for a quadruped robot that can withstand field conditions without overheating.</p>
+        <h2>Cause</h2>
+        <p>A class in Fall 2023 required us to form groups and come up with a project that uses the skills learned from the experiments we conducted throughout the previous year.</p>
+        <h2>Process</h2>
+        <p>The goal of the project was to make a planetary gearbox that was dustproof and cooled passively by mineral oil. My teammate's robotics lab had issues with air-cooled motors overheating in the field, even when it was snowing, so our motor had to limit dust ingress to make sure as much torque as possible goes towards moving the robot (as opposed to overcoming friction caused by dust).</p>
+        <p>My teammate who was in the robotics lab took on most of the designing and machining of the motor parts. I helped out with the press fit calculations, but my two other teammates and I were more focused on designing the test stand and writing the code for it. Because I made <a href="../BB-DAQ/">BB-DAQ</a> the previous semester, I was able to use it to handle the load cell data being relayed by the Arduino. Around testing time, we all finalized the data acquisition code and put it on the Raspberry Pi that would be running the files. The finished test stand (along with the motor) is shown below:</p>
+        <table>
+            <tr>
+                <th>Test Stand</th>
+                <th>Data Flow</th>
+            </tr>
+            <tr>
+                <td><img src="./TestStand.jpg" height="600"></td>
+                <td><img src="./DataFlow.jpg" height="600"></td>
+            </tr>
+        </table>
+        <h2>Results</h2>
+        <p>When we ran the tests, we split the data into two categories depending on the motor module's passive cooling:</p>
+        <ul>
+            <li>Dry: There was no oil inside, so air was the cooling fluid</li>
+            <li>Wet: There was oil inside, so oil was the cooling fluid</li>
+        </ul>
+        <p>For each category, we split the data into two types depending on the outcome:</p>
+        <ul>
+            <li>Steady-state: The temperatures reported by the thermocouples leveled off (such that the slope of the curves were less than 0.01ºC/s)</li>
+            <li>Transient: The temperatures reported by the thermocouples reached the safety cutoff (40ºC) before leveling off</li>
+        </ul>
+        <p>After each test, we would wait for the thermocouples to return to room temperature before starting the next test.</p>
+        <p>As soon as we got test data, I began writing MATLAB scripts to deal with the data processing and analysis. Not only did the scripts plot the data categories (dry vs wet) and types (steady-state vs transient), but they could also make GIF files (converted to videos for this page) showing a simplified version of the heat transfer occurring inside the motor module. The data showed that the addition of mineral oil in the motor module resulted in the following:</p>
+        <ul>
+            <li>A 33% increase in maximum steady-state torque</li>
+            <li>An order of magnitude increase in maximum output torque (10 N•m) runtime</li>
+            <li>A 17% increase in weight</li>
+        </ul>
+        <table>
+            <tr>
+                <th>Steady-State</th>
+                <th>Transient</th>
+            </tr>
+            <tr>
+                <td><img src="./SteadyState.jpg" width="600"></td>
+                <td><img src="./TransientState.jpg" width="600"></td>
+            </tr>
+            <tr>
+                <th>Wet: 10 N•m</th>
+                <th>Dry: 10 N•m</th>
+            </tr>
+            <tr>
+                <td><video src="./Oil_10Nm.mp4" width="600" controls muted></td>
+                <td><video src="./Air_10Nm.mp4" width="600" controls muted></td>
+            </tr>
+        </table>
+        <br><br><br>
+        <button onclick="goBack()">Go Back</button>
+        <script>
+            function goBack() {history.back();}
+        </script>
+    </body>
+</html>
