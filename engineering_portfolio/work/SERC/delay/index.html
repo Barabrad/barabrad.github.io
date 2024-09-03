@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <link rel="icon" type="image/png" href="/favicon.ico?" />
+        <link rel="apple-touch-icon" type="image/x-icon" href="/favicon.ico?" />
+        <title>LEAPFROG Delay Troubleshooting</title>
+        <link rel="stylesheet" href="/commonStyles.css">
+    </head>
+    <body a link="blue" vlink="blue">
+        <h1>Delay Troubleshooting</h1>
+        <h2>Goal</h2>
+        <p>Find out what was causing the growing delay in the vehicle's flight software.</p>
+        <h2>Cause</h2>
+        <p>During a hot fire test, we noticed that each command took a longer time than the last to be executed by the vehicle. The delay became unacceptable when the engine shutdown command took seconds to execute.</p>
+        <h2>Process</h2>
+        <p>At first, we added more logging so we could see where exactly the delay took place. To our surprise, the vehicle was executing commands as soon as the main file parsed them. Because the clocks on the "ground station" laptop and the Raspberry Pi on the vehicle were not synchronized, the only thing we could determine from the test is that the commands were not time-intensive.</p>
+        <p>At one point, one of my seniors increased the interval between heartbeat signals (the vehicle and ground station confirming they're still able to communicate), and the growing delay went away. However, we did not understand why that was the case.</p>
+        <p>Near the end of summer, I modified the heartbeat code such that each signal had a numerical identifier, allowing us to determine the time at which we send the heartbeat and when we receive the confirmation. When I compiled the data after various runs (with the original heartbeat interval), I found that the delay only increased after a command was sent, which disproved our original idea that the delay was constantly increasing on its own. Additionally, I noticed that the increase in delay happened to be the time interval used by the main file to check the buffer for commands. Because of what my senior found earler, I realized that the heartbeat interval was equal to the command check interval. Because those intervals are the same, any command sent causes a backlog in the buffer, resulting in a delay that increases with each command sent.</p>
+        <h2>Results</h2>
+        <p>We chose to shorten the loop check interval to half of the heartbeat interval instead of increasing the heartbeat interval, and the growing delay went away.</p>
+        <br><br><br>
+        <button onclick="goBack()">Go Back</button>
+        <script>
+            function goBack() {history.back();}
+        </script>
+    </body>
+</html>

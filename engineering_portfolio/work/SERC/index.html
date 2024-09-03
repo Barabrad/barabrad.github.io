@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <link rel="icon" type="image/png" href="/favicon.ico?" />
+        <link rel="apple-touch-icon" type="image/x-icon" href="/favicon.ico?" />
+        <title>Brad's Engineering Portfolio - SERC</title>
+        <link rel="stylesheet" href="/commonStyles.css">
+    </head>
+    <body a link="blue" vlink="blue">
+        <h1>Brad's Engineering Portfolio</h1>
+        <h2>SERC Projects</h2>
+        <p>The project I worked on at SERC was the Lunar Entry and Approach Platform For Research On Ground (<a href="https://www.isi.edu/centers-serc/research/lunar-lander-prototype/" target="_blank"></a>LEAPFROG</a>). The main subprojects I worked on for LEAPFROG are listed in chronological order, with the oldest at the bottom:</p>
+        <table>
+            <tr>
+                <th>Project</th>
+                <th>Semester</th>
+                <th>Group/Solo</th>
+                <th>Brief Description</th>
+            </tr>
+            <tr>
+                <td><a href="./telemetry/">Live Telemetry</a></td>
+                <td>Fall 2022</td>
+                <td>Solo</td>
+                <td>We felt that there should be a better way to see telemetry than typing a series of commands.</td>
+            </tr>
+            <tr>
+                <td><a href="./recalib/">IMU Recalibration</a></td>
+                <td>Fall 2022</td>
+                <td>Solo</td>
+                <td>If something went wrong in the initial IMU calibration, we needed a way to fix it without manually restarting the vehicle.</td>
+            </tr>
+            <tr>
+                <td><a href="./delay/">Delay Troubleshooting</a></td>
+                <td>Summer 2022</td>
+                <td>Group</td>
+                <td>We noticed that there was an increasing delay with each command sent.</td>
+            </tr>
+            <tr>
+                <td><a href="./burn/">Suicide Burn Model</a></td>
+                <td>Summer 2022</td>
+                <td>Solo</td>
+                <td>We were asked to develop an emergency landing sequence.</td>
+            </tr>
+            <tr>
+                <td><a href="./coupling/">Sensor Coupling</a></td>
+                <td>Summer 2022</td>
+                <td>Group</td>
+                <td>The task was to determine the vehicle's actual height using data from two sensors.</td>
+            </tr>
+            <tr>
+                <td><a href="./thrust/">Thrust Tests</a></td>
+                <td>Spring 2022</td>
+                <td>Group</td>
+                <td>We had to find out how much thrust our compressed air tanks can provide.</td>
+            </tr>
+            <tr>
+                <td><a href="./pressure/">Pressure Measurements</a></td>
+                <td>Spring 2022</td>
+                <td>Solo</td>
+                <td>My first task was to make a separate stream in our vehicle's software for the pressure data.</td>
+            </tr>
+        </table>
+        <br><br><br>
+        <button onclick="goBack()">Go Back</button>
+        <script>
+            function goBack() {history.back();}
+        </script>
+    </body>
+</html>

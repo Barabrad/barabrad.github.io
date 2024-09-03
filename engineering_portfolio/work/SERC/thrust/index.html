@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <link rel="icon" type="image/png" href="/favicon.ico?" />
+        <link rel="apple-touch-icon" type="image/x-icon" href="/favicon.ico?" />
+        <title>LEAPFROG Thrust Testing</title>
+        <link rel="stylesheet" href="/commonStyles.css">
+    </head>
+    <body a link="blue" vlink="blue">
+        <h1>Thrust Testing</h1>
+        <h2>Goal</h2>
+        <p>Determine how much thrust our compressed air tanks can provide for controlling the lander's orientation during flight.</p>
+        <h2>Cause</h2>
+        <p>We had to find out if our ACS (Attitude Control System) was capable of exerting a sufficient torque on the system (and we would get updated values for our simulations).</p>
+        <h2>Process</h2>
+        <p>At first, I made a rudimentary test stand that connected the end of the nozzle to a force gauge. When we got no data, we realized that the thrust was too weak to overcome the friction of the test stand's swivel. Eventually, we got new nozzles and a load cell that was more sensitive than the gauge. I took on writing the code for the test while my labmates took on making a test stand.</p>
+        <h2>Results</h2>
+        <p>The test ran successfully, and we were able to get updated thrust values. The code, along with the data and procedure, were uploaded to our team's shared drive for future reference.</p>
+        <p>Additionally, I had not worked with an Arduino before, so the experience gained from this test came in handy when I started working on <a href="../../../personal/BB-DAQ/">BB-DAQ</a>.</p>
+        <br><br><br>
+        <button onclick="goBack()">Go Back</button>
+        <script>
+            function goBack() {history.back();}
+        </script>
+    </body>
+</html>

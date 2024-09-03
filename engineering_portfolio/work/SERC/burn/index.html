@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <link rel="icon" type="image/png" href="/favicon.ico?" />
+        <link rel="apple-touch-icon" type="image/x-icon" href="/favicon.ico?" />
+        <title>LEAPFROG Suicide Burn</title>
+        <link rel="stylesheet" href="/commonStyles.css">
+    </head>
+    <body a link="blue" vlink="blue">
+        <h1>Suicide Burn</h1>
+        <h2>Goal</h2>
+        <p>Write code that the vehicle can use to execute a suicide burn.</p>
+        <h2>Cause</h2>
+        <p>We were asked to come up with an emergency landing sequence for the lander.</p>
+        <h2>Process</h2>
+        <p>I took on this task and began writing code for a suicide burn (waiting in free-fall until just the right moment to begin thrusing at full force). I remembered hearing that suicide burns are the most fuel-efficient, so I chose it because I wanted to use minimal fuel. Because I was working from first principles, I started out with the assumption that the lander's motion was purely vertical (and without rotation or drag). However, I assumed a worst-case scenario where we no longer get data, so the only information I had to work with was the vehicle's state before the emergency landing sequence.</p>
+        <p>At first, I started with a system where the lander had no initial velocity. I began solving the system for time analytically as much as I could since I knew that solving it numerically would be computationally expensive, but I got to a point where I had to solve a single equation numerically. I was working in C, so I opted for a bisection solver, but I generalized it to take any function with 1 variable and 6 constants. Once I verified that my code worked with a MATLAB suicide burn simulation, I added in the initial velocity.</p>
+        <h2>Results</h2>
+        <p>After many iterations, I realized that I could minimize the changes to the zero-velocity derivation by finding the amount of time it would take to reach zero velocity before entering a free-fall. I then took that time and added it to the time spent before starting the burn, which accounts for a downward velocity. My MATLAB simulation confirmed my work, and the C code was ready to be implemented.</p>
+        <br><br><br>
+        <button onclick="goBack()">Go Back</button>
+        <script>
+            function goBack() {history.back();}
+        </script>
+    </body>
+</html>

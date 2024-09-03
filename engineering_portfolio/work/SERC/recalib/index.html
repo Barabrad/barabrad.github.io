@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <link rel="icon" type="image/png" href="/favicon.ico?" />
+        <link rel="apple-touch-icon" type="image/x-icon" href="/favicon.ico?" />
+        <title>LEAPFROG IMU Recalibration</title>
+        <link rel="stylesheet" href="/commonStyles.css">
+    </head>
+    <body a link="blue" vlink="blue">
+        <h1>IMU Recalibration</h1>
+        <h2>Goal</h2>
+        <p>Allow the user to recalibrate the IMU (Inertial Measurement Unit) by sending a command.</p>
+        <h2>Cause</h2>
+        <p>Because the engine we were using would not start unless it was close to horizontal, we had to tilt the vehicle to start the engine. However, if the vehicle was turned on while tilted, the initial IMU calibration would set the tilted position to the "zero" orientation. To fix this, we had to manually turn off and turn on the vehicle's avionics.</p>
+        <h2>Process</h2>
+        <p>At first, I added the command in the vehicle's command-managing files, and a calibration flag in the data packets that get sent from the Raspberry Pi (which receives the commands) to the STM32 (which runs the real-time code). The command caused the calibration flag to be flipped to a one for the next packet that gets sent from the Pi to the STM, which would trigger the IMU calibration process.</p>
+        <p>However, I noticed that the IMU would not recalibrate despite the flag being flipped. After some troubleshooting, I realized that the STM did not receive the flipped flag when it was sent for only one packet. My quick solution was to have the flipped flag send for 10 packets.</p>
+        <h2>Results</h2>
+        <p>The calibration command started working, saving us a hassle if we turn the vehicle on when it is not level.</p>
+        <p>As for the quick solution I implemented, I left a note in the code with a suggestion for a proper solution: create a new acknowledgement flag in the packets that get sent from the STM to the Pi, and keep the calibration flag flipped until the acknowledgement flag is flipped (which would occur when the STM receives the flipped calibration flag).</p>
+        <br><br><br>
+        <button onclick="goBack()">Go Back</button>
+        <script>
+            function goBack() {history.back();}
+        </script>
+    </body>
+</html>

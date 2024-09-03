@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <link rel="icon" type="image/png" href="/favicon.ico?" />
+        <link rel="apple-touch-icon" type="image/x-icon" href="/favicon.ico?" />
+        <title>LEAPFROG Pressure Measurements</title>
+        <link rel="stylesheet" href="/commonStyles.css">
+    </head>
+    <body a link="blue" vlink="blue">
+        <h1>Pressure Measurements</h1>
+        <h2>Goal</h2>
+        <p>Separate the pressure measurements into their own data stream.</p>
+        <h2>Cause</h2>
+        <p>The pressure measurements were being mixed in a stream with other data. Because this task was not urgent, it was given to me so I could become familiar with the vehicle's flight software and the ROS2 architecture.</p>
+        <h2>Process</h2>
+        <p>I first cloned the GitHub repository, then began looking into ROS2 and seeing how it was implemented in the flight software. When I saw that the expected output and the code did not match, I started researching the imported libraries. However, I would eventually realize that the repository had not been updated before I cloned it, so the mismatch was cleared up after I saw the updated code.</p>
+        <h2>Results</h2>
+        <p>I was able to separate the pressure data into its own stream. This task was also the first time I was working on files with others on GitHub, so I also learned about the importance of keeping repositories up to date.</p>
+        <br><br><br>
+        <button onclick="goBack()">Go Back</button>
+        <script>
+            function goBack() {history.back();}
+        </script>
+    </body>
+</html>

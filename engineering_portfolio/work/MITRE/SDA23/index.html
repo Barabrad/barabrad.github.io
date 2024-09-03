@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <link rel="icon" type="image/png" href="/favicon.ico?" />
+        <link rel="apple-touch-icon" type="image/x-icon" href="/favicon.ico?" />
+        <title>MITRE SDA - Summer 2023</title>
+        <link rel="stylesheet" href="/commonStyles.css">
+    </head>
+    <body a link="blue" vlink="blue">
+        <h1>Space Domain Awareness (Summer 2023)</h1>
+        <h2>Goal</h2>
+        <p>Add functionality to existing analyses so that they can take state vectors and covariances as inputs.</p>
+        <h2>Cause</h2>
+        <p>The analyses in question could take in only TLEs (Two-Line Element Sets) as inputs. State vectors and covariances allow for the propagation of a satellite to be more precise while preserving and propagating the uncertainty in its state.</p>
+        <h2>Process</h2>
+        <p>Before I could work on extending the valid inputs, I had to get the code running on my laptop. Because the code was written on Windows computers, the MATLAB scripts and wrappers (for the dynamic libraries) would not run properly on my Mac. I could not connect to the recommended remote server either, so I started working on making the repository Mac-friendly while waiting for a Windows laptop. With some help from my seniors, I was able to get the code running properly on my Mac before the replacement laptop arrived. (I documented the steps I took in case someone else in the future has the same issue.)</p>
+        <p>Once I got the code working, I began updating the code to allow the new inputs. However, I had to translate some Python code from a sister repository to deal with the covariances. To test the code, I wrote MATLAB scripts that could convert TLEs to state vectors (these conversion scripts and their outputs were solely meant for testing the code, not for actual analyses).</p>
+        <h2>Results</h2>
+        <p>I was able to extend an analysis script to include state vectors and covarainces before my internship ended. The tests I ran with the converted files showed that the code was able to parse the new inputs correctly (the initial states of all inputs were close enough, due to rounding errors).</p>
+        <br><br><br>
+        <button onclick="goBack()">Go Back</button>
+        <script>
+            function goBack() {history.back();}
+        </script>
+    </body>
+</html>

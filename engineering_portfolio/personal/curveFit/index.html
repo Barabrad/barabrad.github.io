@@ -4,7 +4,7 @@
         <meta charset="utf-8">
         <link rel="icon" type="image/png" href="/favicon.ico?" />
         <link rel="apple-touch-icon" type="image/x-icon" href="/favicon.ico?" />
-        <title>curveFit Main Page</title>
+        <title>curveFit</title>
         <link rel="stylesheet" href="/commonStyles.css">
     </head>
     <body a link="blue" vlink="blue">
@@ -12,7 +12,7 @@
         <h2>Goal</h2>
         <p>Create a multivariable curve-fitter that can work with any function as long as the derivatives are given (and are real near the solution).</p>
         <h2>Cause</h2>
-        <p>A paper I was working on with a professor required me to run simulations, and I wanted to find the trends of the data. Google Sheets could work with some of the simpler functions, but not the last one: y = a*(1 - b*x^c).</p>
+        <p>A paper I was working on for a conference (see <a href="../../conferences/IOC2/">here</a> for more) required me to run simulations, and I wanted to find the trends of the data. Google Sheets could work with some of the simpler functions, but not the last one: y = a*(1 - b*x^c).</p>
         <p>I took a class on numerical methods the semester before, so I saw that this problem was an opportunity to practice C++ and numerical solvers.</p>
         <h2>Process</h2>
         <p>I opted to use a bisection solver within a gradient solver, such that whichever variable had the greatest derivative magnitude would be the independent varaible in a bisection solver. Thus, for every iteration of the solver, the independent variable would be adjusted such that the squared error of the curve is minimized. Instead of taking the problem one step at a time, as I did for <a href="../BB-DAQ/">BB-DAQ</a> and <a href="../xls2xlsx/">xls2xlsx</a>, I tackled the whole problem at once. After around two days, the curve-fitter was up and running.</p>
@@ -23,9 +23,7 @@
         <p>Because the code uses a bisection solver, bounds for each parameter are needed. The following bounds were chosen for a, b, and c, respectively: [1,3], [0,1], [-3,-1].</br>
             The parameter values that the code yielded were 2.13588, 0.652533, and -2.05508, respectively, which resulted in a squared error of 0.000614609.</br>
             A graph is included below with the points and the fitted curve:</p>
-        <div class="img_demo">
-            <img src="./demoImage.svg" width="600">
-        </div>
+        <img src="./demoImage.svg" width="600">
         <br><br><br>
         <button onclick="goBack()">Go Back</button>
         <script>

@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <link rel="icon" type="image/png" href="/favicon.ico?" />
+        <link rel="apple-touch-icon" type="image/x-icon" href="/favicon.ico?" />
+        <title>IOC II</title>
+        <link rel="stylesheet" href="/commonStyles.css">
+    </head>
+    <body a link="blue" vlink="blue">
+        <h1>IOC II</h1>
+        <h2>Conference Topic</h2>
+        <p>The <a href="https://www.hou.usra.edu/meetings/orbitaldebris2023/" target="_blank">2nd International Orbital Debris Conference</a> is focused on orbital debris, and it had speakers from across the world.</p>
+        <h2>Presentation Topic</h2>
+        <p>While doing research under Dr. Michael Kezirian, we started looking into the implications of orbital debris in lunar and cislunar orbit after my sophomore year. By finding the cost in fuel for making collision avoidance maneuvers, we could provide guidance for setting requirements on the tracking of orbital debris in lunar and cislunar space.</p>
+        <h2>Process</h2>
+        <p>Using the Artemis I mission as a baseline trajectory, I made a model of a lunar mission in <a href="https://www.ansys.com/products/missions/ansys-stk" target="_blank">STK</a> (Systems Tool Kit). Following my professor's guidance, I ran multiple maneuvers at a point in cislunar space and right before the spacecraft enters lunar orbit, finding the relationships between the time (between the burn and the "collision"), separation distance, and maneuver magnitude (measured in velocity change). To find some of the trend curves, I made a <a href="../../personal/curveFit/">curve-fitter</a> that could work with multiple parameters.</p>
+        <p>From there, we began developing the paper and slide deck for the conference.</p>
+        <h2>Results</h2>
+        <p>On December 4, 2023, I presented our work at the conference.</p>
+        <p>After the conference, we began fine-tuning the paper for publication in the <a href="https://www.sciencedirect.com/journal/journal-of-space-safety-engineering" target="_blank">Journal of Space Safety Engineering</a>. Many iterations later, the <a href="https://doi.org/10.1016/j.jsse.2024.08.006" target="_blank">paper</a> was published.</p>
+        <br><br><br>
+        <button onclick="goBack()">Go Back</button>
+        <script>
+            function goBack() {history.back();}
+        </script>
+    </body>
+</html>

@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <link rel="icon" type="image/png" href="/favicon.ico?" />
+        <link rel="apple-touch-icon" type="image/x-icon" href="/favicon.ico?" />
+        <title>MITRE Network Characterization - Summer 2024</title>
+        <link rel="stylesheet" href="/commonStyles.css">
+    </head>
+    <body a link="blue" vlink="blue">
+        <h1>Network Characterization (Summer 2024)</h1>
+        <h2>Goal</h2>
+        <p>Characterize the network connection between two Starlink terminals across the country.</p>
+        <h2>Cause</h2>
+        <p>We needed to see if Starlink would be a reliable method of communication for government projects.</p>
+        <h2>Process</h2>
+        <p>Because my partner on this project and I had no experience with networking, since we were both interns finishing our master's degree in astronautical engineering at USC, we had to do a lot of learning before we could figure out how to finish the project. We were given several suggestions for how to go forward, but after much trial-and-error, we settled on using iperf3 and ping. Each program gave us the following data:</p>
+        <table>
+            <tr>
+                <th>Program</th>
+                <th>Test Type</th>
+                <th>Data</th>
+            </tr>
+            <tr>
+                <td>iperf3</td>
+                <td>TCP</td>
+                <td>Throughput, RTT, RTT variation</td>
+            </tr>
+            <tr>
+                <td>iperf3</td>
+                <td>UDP</td>
+                <td>Interarrival jitter, packet loss</td>
+            </tr>
+            <tr>
+                <td>ping</td>
+                <td>-</td>
+                <td>RTT, RTT variation</td>
+            </tr>
+        </table>
+        <p>In order to make the network tests easy to run for future analyses, I wrote a set of test suites using Python that could run the network tests automatically. One suite runs the iperf3 UDP tests at different throughputs, allowing the user to see at which throughputs the packet loss becomes unacceptable. The other is the main suite, which runs the two iperf3 test types and the ping test at specified intervals for a specified time period. (Millisecond timer loops were used to keep track of time.)</p>
+        <p>When we were finally able to run our tests, we found that the network connection would sometimes break (which may have been due to issues with the laptops running the tests instead of Starlink, since a power outage caused such a break). To account for this, I updated the main test suite to have loops that allow them to recover once the network connection is restored. I also added a "kill switch" that could be "pulled" through SSH.</p>
+        <p>My partner focused more on the data analysis part of the project (and she did a lot of research), but we sometimes crossed over when needed. For instance, she wrote the code that conducts the ping test, and I wrote a small set of files that processes and compares weather data to the throughputs found from the iperf3 tests.</p>
+        <h2>Results</h2>
+        <p>We were able to get enough data before our internship's final presentation, and we were able to determine typical throughputs and delays.</p>
+        <p>After the presentation, I had the time to revisit the weather-pulling automation. The <a href="https://www.wunderground.com" target="_blank">website</a> we used for historical weather data would load the data table after the rest of the page loaded, so Python's requests library would not get the data. I eventually found out about <a href="https://phantomjs.org" target="_blank">PhantomJS</a>, so I wrote a JavaScript file that would be run by PhantomJS each time it was called by the main weather Python file, and it worked.</p>
+        <h2>Definitions</h2>
+        <table>
+            <tr>
+                <th>Term</th>
+                <th>Definition</th>
+            </tr>
+            <tr>
+                <td>TCP</td>
+                <td>Transmission Control Protocol, a data transfer protocol that uses handshakes and resends data packets to ensure reliability</td>
+            </tr>
+            <tr>
+                <td>UDP</td>
+                <td>User Datagram Protocol, a data transfer protocol that does <b>not</b> use handshakes or send resend data packets to ensure reliability</td>
+            </tr>
+            <tr>
+                <td>RTT</td>
+                <td>Round-Trip Time, the amount of time it takes a ping request to travel from the sender to the receiver and back, usually measured in milliseconds or microseconds</td>
+            </tr>
+            <tr>
+                <td>Throughput</td>
+                <td>The data transfer rate between two points in a network, usually measured in some variation of bits per second</td>
+            </tr>
+            <tr>
+                <td>Jitter</td>
+                <td>A measure of how much the RTT varies, with higher jitter values meaning more variable RTT (and thus less stable connection), usually measured in milliseconds</td>
+            </tr>
+        </table>
+        <br><br><br>
+        <button onclick="goBack()">Go Back</button>
+        <script>
+            function goBack() {history.back();}
+        </script>
+    </body>
+</html>

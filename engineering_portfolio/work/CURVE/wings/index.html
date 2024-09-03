@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <link rel="icon" type="image/png" href="/favicon.ico?" />
+        <link rel="apple-touch-icon" type="image/x-icon" href="/favicon.ico?" />
+        <title>CURVE Flexible Wings</title>
+        <link rel="stylesheet" href="/commonStyles.css">
+    </head>
+    <body a link="blue" vlink="blue">
+        <h1>Flexible Wings</h1>
+        <h2>Goal</h2>
+        <p>Model a plane with flexible wings.</p>
+        <h2>Cause</h2>
+        <p>Because wings are not perfectly rigid, simulations with rigid wings are not entirely accurate.</p>
+        <h2>Process</h2>
+        <p>The guidance I was given was to model each wing as a set of rigid beams and torsional springs. Having taken differential equations, my apporach was to start from a simplified 2-beam system and work from there. I first solved each system of ODEs (Ordinary Differential Equations) analytically, then used MATLAB to numerically solve the systems of ODEs when they grew too complex to solve by hand.</p>
+        <h2>Results</h2>
+        <p>By summer's end, I finished the unsimplified 2-beam system. To do so, I had to learn how to use Lagrangian physics (which was suggested by my mentor).</p>
+        <br><br><br>
+        <button onclick="goBack()">Go Back</button>
+        <script>
+            function goBack() {history.back();}
+        </script>
+    </body>
+</html>
