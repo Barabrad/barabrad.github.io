@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <link rel="icon" type="image/png" href="/favicon.ico?" />
+        <link rel="apple-touch-icon" type="image/x-icon" href="/favicon.ico?" />
+        <title>Re-Entry Model</title>
+        <link rel="stylesheet" href="/commonStyles.css">
+    </head>
+    <body a link="blue" vlink="blue">
+        <h1>Re-Entry Model</h1>
+        <h2>Goal</h2>
+        <p>Create a set of files that model the re-entry of a spacecraft with thrusters and parachutes.</p>
+        <h2>Cause</h2>
+        <p>My EDL (Entry, Descent, and Landing) class in Fall 2023 required us to model the re-entry of a spacecraft for multiple assignments, as well as the final group project. I was able to use the files I made for the assignments in the project.</p>
+        <h2>Process</h2>
+        <p>I built off of simplified models that were made for earlier assignments, mainly the parchute re-entry model. The resulting propagator performs the following steps at each time step:</p>
+        <ol>
+            <li>Find the density at the current altitude based on the exponential model.</li>
+            <li>Determine the accelerations in the x and y directions (from thrust, parachute drag, and spacecraft drag).</li>
+            <li>Find the new velocity and position in the x and y directions.</li>
+        </ol>
+        <h2>Results</h2>
+        <p>The propagator ended working, so I made a set of files that could solve the re-entry propagation for the mass flow rate of the thrusters if the initial and final states are given. To do this, I used a bisection solver I made earlier in the semester.</p>
+        <p>The code has been uploaded to a <a href="https://www.github.com/Barabrad/paraThrustEntry" target="_blank">GitHub repository</a>.</p>
+        <br><br><br>
+        <button onclick="goBack()">Go Back</button>
+        <script>
+            function goBack() {history.back();}
+        </script>
+    </body>
+</html>
