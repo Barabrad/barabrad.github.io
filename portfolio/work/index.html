@@ -10,7 +10,8 @@
     <body a link="blue" vlink="blue">
         <h1>Brad's Engineering Portfolio</h1>
         <h2>Work Projects</h2>
-        <p>As projects get added to the repository, their links will appear below in the order the projects occurred:</p>
+        <p>As projects get added to the repository, their links will appear below in the order the projects occurred:<br>
+        (Note that for consecutive seasonal internships at the same organization, there are gaps between overall start and end times.)</p>
         <table>
             <tr>
                 <th>Organization</th>
@@ -21,9 +22,9 @@
             </tr>
             <tr>
                 <td><a href="./MITRE/">MITRE</a></td>
-                <td>Internship</td>
+                <td>Summer Internship</td>
                 <td>May 2023</td>
-                <td>Present</td>
+                <td>September 2024</td>
                 <td>MITRE</td>
             </tr>
             <tr>
@@ -42,9 +43,11 @@
             </tr>
         </table>
         <br><br><br>
-        <button onclick="goBack()">Go Back</button>
+        <button onclick="goBack()">Go Back</button><br><br>
+        <button onclick="goHome()">Portfolio Home</button>
         <script>
             function goBack() {history.back();}
+            function goHome() {location.assign("/portfolio/");}
         </script>
     </body>
 </html>

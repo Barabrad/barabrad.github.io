@@ -25,9 +25,11 @@
         <p>We had originally planned to use <a href="https://docs.ros.org/en/jazzy/" target="_blank">ROS2</a>, but we found out that we could not use custom messages with our purely Python architecture. Because we did not have much time left, I had to resort to a naïve implementation for the sensor fusion. We were able to get data, but the IMU drift kept messing up the fused sensor data.</p>
         <p>For more details on the results, click the <a href="./submissionPage.html">link</a> to see the submission page.</p>
         <br><br><br>
-        <button onclick="goBack()">Go Back</button>
+        <button onclick="goBack()">Go Back</button><br><br>
+        <button onclick="goHome()">Portfolio Home</button>
         <script>
             function goBack() {history.back();}
+            function goHome() {location.assign("/portfolio/");}
         </script>
     </body>
 </html>

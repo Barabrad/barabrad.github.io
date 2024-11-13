@@ -15,7 +15,7 @@
         <p>A paper I was working on for a conference (see <a href="../../conferences/IOC2/">here</a> for more) required me to run simulations, and I wanted to find the trends of the data. Google Sheets could work with some of the simpler functions, but not the last one: y = a*(1 - b*x^c).</p>
         <p>I took a class on numerical methods the semester before, so I saw that this problem was an opportunity to practice C++ and numerical solvers.</p>
         <h2>Process</h2>
-        <p>I opted to use a bisection solver within a gradient solver, such that whichever variable had the greatest derivative magnitude would be the independent varaible in a bisection solver. Thus, for every iteration of the solver, the independent variable would be adjusted such that the squared error of the curve is minimized. Instead of taking the problem one step at a time, as I did for <a href="../BB-DAQ/">BB-DAQ</a> and <a href="../xls2xlsx/">xls2xlsx</a>, I tackled the whole problem at once. After around two days, the curve-fitter was up and running.</p>
+        <p>I opted to use a bisection solver within a gradient solver, such that whichever variable had the greatest derivative magnitude would be the independent varaible in a bisection solver. Thus, for every iteration of the solver, the independent variable would be adjusted such that the squared error of the curve is minimized. Instead of taking the problem one step at a time, as I did for <a href="../BB-DAQ/">BB-DAQ</a>, I tackled the whole problem at once. After around two days, the curve-fitter was up and running.</p>
         <h2>Results</h2>
         <p>The code, along with a short README file, has been uploaded to a <a href="https://www.github.com/Barabrad/curveFit" target="_blank">GitHub repository</a> for others to use.</p>
         <p>An example of this code's output will be shown for fitting y = a*(1 - b*x^c) to the following (x,y) points from the paper:</p>
@@ -25,9 +25,11 @@
             A graph is included below with the points and the fitted curve:</p>
         <img src="./demoImage.svg" width="600">
         <br><br><br>
-        <button onclick="goBack()">Go Back</button>
+        <button onclick="goBack()">Go Back</button><br><br>
+        <button onclick="goHome()">Portfolio Home</button>
         <script>
             function goBack() {history.back();}
+            function goHome() {location.assign("/portfolio/");}
         </script>
     </body>
 </html>

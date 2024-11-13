@@ -19,9 +19,11 @@
         <h2>Results</h2>
         <p>After many iterations, I realized that I could minimize the changes to the zero-velocity derivation by finding the amount of time it would take to reach zero velocity before entering a free-fall. I then took that time and added it to the time spent before starting the burn, which accounts for a downward velocity. My MATLAB simulation confirmed my work, and the C code was ready to be implemented.</p>
         <br><br><br>
-        <button onclick="goBack()">Go Back</button>
+        <button onclick="goBack()">Go Back</button><br><br>
+        <button onclick="goHome()">Portfolio Home</button>
         <script>
             function goBack() {history.back();}
+            function goHome() {location.assign("/portfolio/");}
         </script>
     </body>
 </html>
