@@ -14,11 +14,11 @@
         <h2>Cause</h2>
         <p>We had a unidirectional LiDAR (Light Detection and Ranging) sensor as our altimeter that found the distance from the bottom of the vehicle to the ground, but the data returned would not be accurate if the vehicle was tilted.</p>
         <h2>Process</h2>
-        <p>When my labmate and I were brainstorming, I first tried using trigonometery starting from a 2D case. We were stumped when we added the third dimension, but then I remembered how one of my recent classes briefly covered quaternions. After some sketches (shown below), I realized that we could convert each roll-pitch-yaw data set derived from the IMU (Inertial Measurement Unit) into a quaterion to find the altimeter's vector by rotating the -h<sub>alt</sub><b>k</b> vector. Afterwards, the scalar projection of that rotated vector on the -<b>k</b> vector would give the actual altitude.</p>
-        <img src="./quat_process.jpg" width="600px">
+        <p>I first tried using trigonometery starting from a 2D case, but got stumped when moving into the third dimension. However, I then remembered how one of my recent classes briefly covered quaternions. After some sketches (shown below), I realized that we could convert each roll-pitch-yaw data set derived from the IMU (Inertial Measurement Unit) into a quaterion to find the altimeter's vector by rotating the -h<sub>alt</sub><b>k</b> vector. Afterwards, the scalar projection of that rotated vector on the -<b>k</b> vector would give the actual altitude.</p>
+        <img src="./quat_process.jpg" width="600">
         <h2>Results</h2>
-        <p>After uploading the code on the vehicle, and troubleshooting the integration of the code, we found that our process worked.</p>
-        <p>This task gave me enough IMU experience to take on the <a href="../../../class/aste404proj/">sensor fusion project</a> in the following semester.</p>
+        <p>After uploading the code on the vehicle, and troubleshooting the integration of the code, we found that my process worked.</p>
+        <p>This task gave me enough IMU experience to take on the <a href="../../../class/aste404proj/">sensor fusion</a> and <a href="../../../class/itp348proj/">wrist posture aide</a> projects in the following semesters.</p>
         <br><br><br>
         <button onclick="goBack()">Go Back</button><br><br>
         <button onclick="goHome()">Portfolio Home</button>
