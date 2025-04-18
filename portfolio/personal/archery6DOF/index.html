@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <link rel="icon" type="image/png" href="/favicon.ico?" />
+        <link rel="apple-touch-icon" type="image/x-icon" href="/favicon.ico?" />
+        <title>archery6DOF</title>
+        <link rel="stylesheet" href="/commonStyles.css">
+    </head>
+    <body a link="blue" vlink="blue">
+        <h1>archery6DOF</h1>
+        <h2>Goal</h2>
+        <p>Create a 6-degree-of-freedom (6-DOF) simulation of an arrow's flight.</p>
+        <h2>Cause</h2>
+        <p>Because I have worked with 3-DOF simulations (focusing either on translation or rotation), I wanted to use the skills I gained from those to make a 6-DOF simulation that focuses both on translation and rotation.</p>
+        <p>Also, I got into archery recently, so I could go to the range to see how realistic my simulation is. If it is realistic, it could help me figure out how to aim to properly accomodate for wind.</p>
+        <h2>Process</h2>
+        <p>The spacecraft dynamics class I was taking before making this simulation had a set of projects involving 3-DOF simulations for the rotation of rigid bodies, so I knew the steps I needed to take before getting into the math:</p>
+        <ol>
+            <li>Determine the inertial and arrow-fixed coordinate frames</li>
+            <li>Determine the quaternion that goes from the arrow-fixed frame to the inertial frame at the initial time</li>
+            <li>Determine the contents of the state vector</li>
+        </ol>
+        <p>The inertial frame had y as the vector from the archer to the target (but parallel to the ground), z as the vector pointing straight up, and x pointing to the archer's right to complete the frame. The arrow's frame had z as the arrow's pointing vector, y as the vector pointing to the arrow's right (when looking from the tail), and x pointing "up" to complete the frame.</p>
+        <p>I ended up with a 13-term state vector: 3 for position, 3 for translational velocity, 3 for angular velocity, and 4 for the quaternion's derivative. I assumed that the archer and target are both stationary in the same inertial frame, since arrows typically fly for a short time, and drag far outweighs the Coriolis Effect.</p>
+        <p>The next step was to calculate the forces and moments due to drag and gravity. I used the quaternion to transform the relative velocity of the arrow with respect to the wind from the inertial frame to the arrow-fixed frame, which made it much easier to calculate the body-fixed moments. At the end, I used the quaternion again to transform the calculated body-fixed drag forces back to the inertial frame. I had to make assumptions about the drag coefficients of the different arrow parts, and I also assumed that the drag on a component could be modeled by applying the drag vector at its center of mass (COM) for calculating the moments caused by drag.</p>
+        <p>Finally, I used MATLAB's <a href="https://www.mathworks.com/help/matlab/ref/ode45.html">ode45</a> function to solve the system of ordinary differential equations for the state vector.</p>
+        <h2>Results</h2>
+        <p>The code, along with a detailed README file (which specifies the drag coefficient assumptions), has been uploaded to a <a href="https://www.github.com/Barabrad/archery6DOF" target="_blank">GitHub repository</a>.</p>
+        <p>The code generates four plots, but two of them are the most helpful for visualizing the arrow's motion. The example plots shown below are from a wind-less case where the arrow is aimed to be entirely in the inertial y-z plane, 5º up from the inertial x-z plane.</p>
+        <ul>
+            <li>The 3D plot of the arrow's tip and COM, along with their x, y, and z (or x<sub>1</sub>, x<sub>2</sub>, and x<sub>3</sub>) components over time</li>
+            <ul>
+                <li>NOTE: there will be a small error propagated throughout the simulation due to the rounding of irrational numbers in the quaternions</li>
+            </ul>
+            <img src="./arrow_path.svg" height="500">
+            <li>The 3D plot of the arrow (in red) at the last time step relative to the target's bulls-eye (in green)</li>
+            <img src="./arrow_miss.svg" height="500">
+        </ul>
+        <br><br><br>
+        <button onclick="goBack()">Go Back</button><br><br>
+        <button onclick="goHome()">Portfolio Home</button>
+        <script>
+            function goBack() {history.back();}
+            function goHome() {location.assign("/portfolio/");}
+        </script>
+    </body>
+</html>
