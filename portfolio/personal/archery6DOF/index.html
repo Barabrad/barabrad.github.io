@@ -6,6 +6,7 @@
         <link rel="apple-touch-icon" type="image/x-icon" href="/favicon.ico?" />
         <title>archery6DOF</title>
         <link rel="stylesheet" href="/commonStyles.css">
+        <script src="/sharedJS.js"></script>
     </head>
     <body a link="blue" vlink="blue">
         <h1>archery6DOF</h1>
@@ -24,7 +25,7 @@
         <p>The inertial frame had y as the vector from the archer to the target (but parallel to the ground), z as the vector pointing straight up, and x pointing to the archer's right to complete the frame. The arrow's frame had z as the arrow's pointing vector, y as the vector pointing to the arrow's right (when looking from the tail), and x pointing "up" to complete the frame.</p>
         <p>I ended up with a 13-term state vector: 3 for position, 3 for translational velocity, 3 for angular velocity, and 4 for the quaternion's derivative. I assumed that the archer and target are both stationary in the same inertial frame, since arrows typically fly for a short time, and drag far outweighs the Coriolis Effect.</p>
         <p>The next step was to calculate the forces and moments due to drag and gravity. I used the quaternion to transform the relative velocity of the arrow with respect to the wind from the inertial frame to the arrow-fixed frame, which made it much easier to calculate the body-fixed moments. At the end, I used the quaternion again to transform the calculated body-fixed drag forces back to the inertial frame. I had to make assumptions about the drag coefficients of the different arrow parts, and I also assumed that the drag on a component could be modeled by applying the drag vector at its center of mass (COM) for calculating the moments caused by drag.</p>
-        <p>Finally, I used MATLAB's <a href="https://www.mathworks.com/help/matlab/ref/ode45.html">ode45</a> function to solve the system of ordinary differential equations for the state vector.</p>
+        <p>Finally, I used MATLAB's <a href="https://www.mathworks.com/help/matlab/ref/ode45.html">ode45</a> function to solve the system of ordinary differential equations for the state vector. (When I wrote the Python version later on, I used SciPy's <a href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.integrate.solve_ivp.html">solve_ivp</a> function.)</p>
         <h2>Results</h2>
         <p>The code, along with a detailed README file (which specifies the drag coefficient assumptions), has been uploaded to a <a href="https://www.github.com/Barabrad/archery6DOF" target="_blank">GitHub repository</a>.</p>
         <p>The code generates four plots, but two of them are the most helpful for visualizing the arrow's motion. The example plots shown below are from a wind-less case where the arrow is aimed to be entirely in the inertial y-z plane, 5º up from the inertial x-z plane.</p>
@@ -40,9 +41,5 @@
         <br><br><br>
         <button onclick="goBack()">Go Back</button><br><br>
         <button onclick="goHome()">Portfolio Home</button>
-        <script>
-            function goBack() {history.back();}
-            function goHome() {location.assign("/portfolio/");}
-        </script>
     </body>
 </html>

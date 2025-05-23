@@ -5,18 +5,12 @@
         <link rel="icon" type="image/png" href="/favicon.ico?" />
         <link rel="apple-touch-icon" type="image/x-icon" href="/favicon.ico?" />
         <title>Secret Tunnel</title>
+        <link rel="stylesheet" href="/commonStyles.css">
+        <script src="/sharedJS.js"></script>
     </head>
-    <body>
+    <body onload="timedRedirect(1)">
         <h1>Secret Tunnel!</h1>
-        <script>
-            function noop() {var dummy = 0;}
-            setTimeout(noop, 5000);
-            location.replace("https://www.youtube.com/watch?v=4-GiYP_4qc0");
-        </script>
-        <button onclick="goBack()">Go Back</button>
         <br><br><br>
-        <script>
-            function goBack() {history.back();}
-        </script>
+        <button onclick="goBack()">Go Back</button>
     </body>
 </html>

@@ -5,21 +5,14 @@
         <link rel="icon" type="image/png" href="/favicon.ico?" />
         <link rel="apple-touch-icon" type="image/x-icon" href="/favicon.ico?" />
         <title>404 Error Page</title>
+        <link rel="stylesheet" href="/commonStyles.css">
+        <script src="/sharedJS.js"></script>
     </head>
-    <body>
+    <body onload="timedRedirect()">
         <h1>404 Error</h1>
         <p>Looks like you're going to the Shadow Realm, buddy</p>
-        <script>
-            function noop() {var dummy = 0;}
-            setTimeout(noop, 5000);
-            location.replace("https://www.youtube.com/watch?v=dQw4w9WgXcQ");
-        </script>
         <br><br><br>
         <button onclick="goBack()">Go Back</button><br><br>
         <button onclick="goHome()">Portfolio Home</button>
-        <script>
-            function goBack() {history.back();}
-            function goHome() {location.assign("/portfolio/");}
-        </script>
     </body>
 </html>
